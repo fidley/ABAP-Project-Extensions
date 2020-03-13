@@ -1,10 +1,9 @@
-package com.abapblog.adt.extension.passwords;
+package com.abapblog.adt.extension.passwords.logonService;
 
 import org.eclipse.core.resources.IProject;
-
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.NullProgressMonitor;
 
+import com.abapblog.adt.extension.passwords.secureStorage.SecureStorage;
 import com.sap.adt.destinations.logon.AdtLogonServiceFactory;
 import com.sap.adt.destinations.logon.IAdtLogonService;
 import com.sap.adt.destinations.model.IAuthenticationToken;
@@ -49,7 +48,7 @@ public class LogonService implements ILogonService {
 				AuthenticationToken.setPassword(secureStorage.getPassword(project));
 				adtLogonService.ensureLoggedOn(DestinationData, AuthenticationToken, new NullProgressMonitor());
 			} else {
-				adtLogonServiceUI.ensureLoggedOn((IAdaptable) project);
+				adtLogonServiceUI.ensureLoggedOn(project);
 			}
 		}
 	}
@@ -77,6 +76,7 @@ public class LogonService implements ILogonService {
 		}
 	}
 
+	@Override
 	public Boolean isAlreadyLoggedOn(IProject project) {
 		if (isAdtProject(project)) {
 			return adtLogonService.isLoggedOn(project.getName());
@@ -102,12 +102,12 @@ public class LogonService implements ILogonService {
 		}
 	}
 
+	@Override
 	public String getUserForProject(IProject project) {
 		IAdtCoreProject AdtProject = project.getAdapter(IAdtCoreProject.class);
 		IDestinationData DestinationData = AdtProject.getDestinationData();
 		return DestinationData.getUser();
 	}
-	
 
 	@Override
 	public Boolean isAdtProject(IProject project) {

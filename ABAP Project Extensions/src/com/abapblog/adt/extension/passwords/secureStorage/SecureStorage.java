@@ -1,16 +1,18 @@
-package com.abapblog.adt.extension.passwords;
+package com.abapblog.adt.extension.passwords.secureStorage;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.equinox.security.storage.ISecurePreferences;
 import org.eclipse.equinox.security.storage.SecurePreferencesFactory;
 import org.eclipse.equinox.security.storage.StorageException;
 
+import com.abapblog.adt.extension.passwords.Password;
 import com.sap.adt.destinations.model.IDestinationData;
 import com.sap.adt.destinations.model.IDestinationDataWritable;
 import com.sap.adt.project.IAdtCoreProject;
 import com.sap.adt.tools.core.project.AdtProjectServiceFactory;
-import com.sap.adt.tools.core.project.IAbapProject;
 
 public class SecureStorage {
 	public static final String EmptyPassword = "";
@@ -156,6 +158,7 @@ public class SecureStorage {
 				}
 			}
 		}
+		Collections.sort(passwordList);
 		return passwordList;
 	}
 

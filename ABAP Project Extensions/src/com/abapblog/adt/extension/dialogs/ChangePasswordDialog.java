@@ -1,7 +1,5 @@
 package com.abapblog.adt.extension.dialogs;
 
-import java.awt.Checkbox;
-
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
@@ -44,11 +42,10 @@ public class ChangePasswordDialog extends Dialog {
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite container = (Composite) super.createDialogArea(parent);
-		GridLayout gridLayout = (GridLayout) container.getLayout();
 
 		Composite composite = new Composite(container, SWT.NONE);
 		GridData gd_composite = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
-		gd_composite.widthHint = 285;
+		gd_composite.widthHint = 310;
 		gd_composite.heightHint = 90;
 		composite.setLayoutData(gd_composite);
 		composite.setLayout(new GridLayout(3, false));
@@ -85,7 +82,7 @@ public class ChangePasswordDialog extends Dialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(313, 200);
+		return new Point(323, 200);
 	}
 
 	public String getPassword() {
@@ -105,5 +102,10 @@ public class ChangePasswordDialog extends Dialog {
 
 	private void setEncryptValue(Boolean encryptValue) {
 		this.encryptValue = encryptValue;
+	}
+	
+	@Override
+	protected boolean isResizable() {
+	    return true;
 	}
 }

@@ -1,9 +1,5 @@
 package com.abapblog.adt.extension.passwords.view;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.viewers.ITreeContentProvider;
@@ -11,7 +7,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IViewSite;
 
 import com.abapblog.adt.extension.passwords.Password;
-import com.abapblog.adt.extension.passwords.SecureStorage;
+import com.abapblog.adt.extension.passwords.secureStorage.SecureStorage;
 import com.abapblog.adt.extension.passwords.tree.TreeObject;
 import com.abapblog.adt.extension.passwords.tree.TreeParent;
 import com.sap.adt.tools.core.project.AdtProjectServiceFactory;
@@ -30,9 +26,9 @@ public class ViewContentProvider implements ITreeContentProvider {
 	@Override
 	public Object[] getElements(Object parent) {
 		if ((viewSite != null && parent.equals(viewSite)) || (viewSite == null && parent.equals(container))) {
-			if (invisibleRoot == null)
+			if (getInvisibleRoot() == null)
 				initialize();
-			return getChildren(invisibleRoot);
+			return getChildren(getInvisibleRoot());
 		}
 		return getChildren(parent);
 	}
@@ -64,7 +60,7 @@ public class ViewContentProvider implements ITreeContentProvider {
 		try {
 
 			invisibleRoot = createInvisibleRoot();
-			createTreeNodes(invisibleRoot);
+			createTreeNodes(getInvisibleRoot());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -75,8 +71,6 @@ public class ViewContentProvider implements ITreeContentProvider {
 	}
 
 	private void createTreeNodes(TreeParent root) {
-		ArrayList<IProject> availableProjects = new ArrayList<>(
-				Arrays.asList(AdtProjectServiceFactory.createProjectService().getAvailableAdtCoreProjects()));
 		String project = "";
 		String client = "";
 		TreeParent projectNode = null;
@@ -100,12 +94,14 @@ public class ViewContentProvider implements ITreeContentProvider {
 
 			if (!password.user.equals("")) {
 				TreeObject userNode = new TreeObject(password.user, maskPassword(password.encrypted, password.password),
-						password.encrypted, project, client, clientNode);
+						password.encrypted, project, client,
+						clientNode);
 				clientNode.addChild(userNode);
 			}
 
 		}
 	}
+
 
 	private IProject getProjectByName(String projectName) {
 		for (IProject project : AdtProjectServiceFactory.createProjectService().getAvailableAdtCoreProjects()) {
@@ -120,5 +116,9 @@ public class ViewContentProvider implements ITreeContentProvider {
 			return "*******";
 		}
 		return password;
+	}
+
+	public TreeParent getInvisibleRoot() {
+		return invisibleRoot;
 	}
 }

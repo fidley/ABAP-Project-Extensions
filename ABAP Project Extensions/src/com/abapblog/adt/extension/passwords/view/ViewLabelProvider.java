@@ -1,7 +1,5 @@
 package com.abapblog.adt.extension.passwords.view;
 
-
-
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.swt.graphics.Image;
@@ -12,27 +10,24 @@ import com.abapblog.adt.extension.icons.Icons;
 import com.abapblog.adt.extension.passwords.tree.TreeObject;
 import com.abapblog.adt.extension.passwords.tree.TreeParent;
 
-
 public class ViewLabelProvider implements ITableLabelProvider {
 	private Icons icons = new Icons();
+
 	@Override
 	public Image getColumnImage(Object element, int columnIndex) {
 		switch (columnIndex) {
 		case 0:
 			String imageKey = ISharedImages.IMG_OBJ_ELEMENT;
 			if (element instanceof TreeParent) {
-				if (((TreeParent) element).getType().equals(TreeParent.TypeOfFolder.Project))
-				{
+				if (((TreeParent) element).getType().equals(TreeParent.TypeOfFolder.Project)) {
 					return PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_PROJECT);
-				}
-				else
-				{
+				} else {
 					return PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_FOLDER);
-				} 
 				}
+			}
 			if (element instanceof TreeObject) {
 				return icons.getIcon(Icons.ICON_USER_NODE);
-				}
+			}
 
 			return PlatformUI.getWorkbench().getSharedImages().getImage(imageKey);
 		case 1:
@@ -40,8 +35,6 @@ public class ViewLabelProvider implements ITableLabelProvider {
 		}
 		return null;
 	}
-	
-	
 
 	@Override
 	public String getColumnText(Object element, int columnIndex) {

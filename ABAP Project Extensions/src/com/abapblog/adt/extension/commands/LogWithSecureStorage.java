@@ -10,8 +10,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
-import com.abapblog.adt.extension.passwords.LogonServiceFactory;
-import com.abapblog.adt.extension.passwords.LogonWithJob;
+import com.abapblog.adt.extension.passwords.logonService.LogonServiceFactory;
+import com.abapblog.adt.extension.passwords.logonService.LogonWithJob;
 
 public class LogWithSecureStorage extends AbstractHandler {
 	@Override

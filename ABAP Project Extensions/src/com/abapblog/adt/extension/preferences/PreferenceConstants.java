@@ -6,5 +6,6 @@ public class PreferenceConstants {
 	public static final String doAutomaticLogonAtExpandOfProject = "doAutomaticLogonAtExpandOfProject";
 	public static final String askForPasswordAtProjectCreation = "askForPasswordAtProjectCreation";
 	public static final String AutomaticLogonOnlyForStoredPasswords = "AutomaticLogonOnlyForStoredPasswords";
-
+	public static final String AutomaticLogonForProjectPrefix = "AutomaticLogonForProject";
+	public static final String AutomaticLogonForAllPossibleProjects = "AutomaticLogonForAllPossibleProjects";
 }
