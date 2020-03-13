@@ -15,7 +15,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.AutomaticLogonOnlyForStoredPasswords, true);
 		store.setDefault(PreferenceConstants.doAutomaticLogonAtExpandOfProject, true);
 		store.setDefault(PreferenceConstants.askForPasswordAtProjectCreation, true);
-
+		store.setDefault(PreferenceConstants.AutomaticLogonForAllPossibleProjects, true);
 	}
 
 }

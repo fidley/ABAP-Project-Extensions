@@ -3,10 +3,9 @@ package com.abapblog.adt.extension.passwords.projectExplorer;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 
-import com.abapblog.adt.extension.Activator;
-import com.abapblog.adt.extension.passwords.ILogonService;
-import com.abapblog.adt.extension.passwords.LogonServiceFactory;
-import com.abapblog.adt.extension.preferences.PreferenceConstants;
+import com.abapblog.adt.extension.passwords.logonService.ILogonService;
+import com.abapblog.adt.extension.passwords.logonService.LogonServiceFactory;
+import com.abapblog.adt.extension.preferences.Preferences;
 
 //Dummy Content Provider to do automatic logon to SAP systems
 //before the standard SAP logon popup appears.
@@ -14,8 +13,7 @@ public class ContentProvider implements ITreeContentProvider {
 
 	@Override
 	public Object[] getChildren(Object treeObject) {
-		if (Activator.getDefault().getPreferenceStore()
-				.getBoolean(PreferenceConstants.doAutomaticLogonAtExpandOfProject)) {
+		if (Preferences.doAutomaticLogonAtExpandOfProject()) {
 			if (treeObject instanceof IProject) {
 				IProject project = (IProject) treeObject;
 				ILogonService logonService = LogonServiceFactory.create();

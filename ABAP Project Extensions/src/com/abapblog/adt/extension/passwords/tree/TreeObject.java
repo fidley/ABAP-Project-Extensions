@@ -28,43 +28,38 @@ public class TreeObject implements IAdaptable {
 		if (encrypted == null) {
 			if (other.encrypted != null)
 				return false;
-		}
-		else if (!encrypted.equals(other.encrypted))
+		} else if (!encrypted.equals(other.encrypted))
 			return false;
 		if (user == null) {
 			if (other.user != null)
 				return false;
-		}
-		else if (!user.equals(other.user))
+		} else if (!user.equals(other.user))
 			return false;
-		
+
 		if (project == null) {
 			if (other.project != null)
 				return false;
-		}
-		else if (!project.equals(other.project))
+		} else if (!project.equals(other.project))
 			return false;
-		
+
 		if (client == null) {
 			if (other.client != null)
 				return false;
-		}
-		else if (!client.equals(other.client))
+		} else if (!client.equals(other.client))
 			return false;
-		
+
 		if (password == null) {
 			if (other.password != null)
 				return false;
-		}
-		else if (!password.equals(other.password))
+		} else if (!password.equals(other.password))
 			return false;
 		if (parent == null) {
 			if (other.parent != null)
 				return false;
-		}
-		else if (!parent.equals(other.parent))
+		} else if (!parent.equals(other.parent))
 			return false;
 		return true;
+
 	}
 
 	private TreeParent parent;
@@ -74,7 +69,8 @@ public class TreeObject implements IAdaptable {
 	protected String client;
 	private Boolean encrypted;
 
-	public TreeObject(String user, String password, Boolean encrypted, String project, String client, TreeParent parent ) {
+	public TreeObject(String user, String password, Boolean encrypted, String project,
+			String client, TreeParent parent) {
 
 		this.user = user;
 		this.client = client;
@@ -121,7 +117,6 @@ public class TreeObject implements IAdaptable {
 		this.encrypted = encrypted;
 	}
 
-
 	public String getProject() {
 		return project;
 	}
@@ -129,4 +124,5 @@ public class TreeObject implements IAdaptable {
 	public String getClient() {
 		return client;
 	}
+
 }

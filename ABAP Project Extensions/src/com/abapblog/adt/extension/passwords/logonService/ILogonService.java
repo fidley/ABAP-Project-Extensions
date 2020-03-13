@@ -1,4 +1,4 @@
-package com.abapblog.adt.extension.passwords;
+package com.abapblog.adt.extension.passwords.logonService;
 
 import org.eclipse.core.resources.IProject;
 

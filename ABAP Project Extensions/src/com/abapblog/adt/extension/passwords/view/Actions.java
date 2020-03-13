@@ -1,31 +1,21 @@
 package com.abapblog.adt.extension.passwords.view;
 
-import javax.swing.JOptionPane;
-
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.dialogs.PopupDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.window.Window;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 
 import com.abapblog.adt.extension.dialogs.ChangePasswordDialog;
 import com.abapblog.adt.extension.dialogs.ClientDialog;
 import com.abapblog.adt.extension.dialogs.UserDialog;
-import com.abapblog.adt.extension.passwords.ILogonService;
-import com.abapblog.adt.extension.passwords.LogonServiceFactory;
-import com.abapblog.adt.extension.passwords.SecureStorage;
+import com.abapblog.adt.extension.passwords.logonService.ILogonService;
+import com.abapblog.adt.extension.passwords.logonService.LogonServiceFactory;
+import com.abapblog.adt.extension.passwords.secureStorage.SecureStorage;
 import com.abapblog.adt.extension.passwords.tree.TreeObject;
 import com.abapblog.adt.extension.passwords.tree.TreeParent;
 import com.sap.adt.tools.core.project.AdtProjectServiceFactory;
@@ -59,7 +49,7 @@ public class Actions {
 						if (passwordDialog.open() == Window.OK) {
 							secureStorage.changePasswordForUser(object.getProject(), object.getClient(),
 									object.getUser(), passwordDialog.getPassword(), passwordDialog.getEncryptValue());
-							PasswordView.refreshViewer(viewer);
+							PasswordView.refreshViewer();
 						}
 					}
 
@@ -84,8 +74,8 @@ public class Actions {
 								secureStorage.createNodeForClient(object.getProject(), clientDialog.getClient());
 								secureStorage.createNodeForUser(object.getProject(), clientDialog.getClient(),
 										logonService.getUserForProject(Actions.getProjectByName(object.getProject())),
-										secureStorage.EmptyPassword, false);
-								PasswordView.refreshViewer(viewer);
+										SecureStorage.EmptyPassword, false);
+								PasswordView.refreshViewer();
 							}
 						}
 					}
@@ -110,8 +100,8 @@ public class Actions {
 						userDialog.create();
 						if (userDialog.open() == Window.OK) {
 							secureStorage.createNodeForUser(object.getProject(), object.getClient(),
-									userDialog.getUser(), secureStorage.EmptyPassword, false);
-							PasswordView.refreshViewer(viewer);
+									userDialog.getUser(), SecureStorage.EmptyPassword, false);
+							PasswordView.refreshViewer();
 						}
 					}
 
@@ -133,7 +123,7 @@ public class Actions {
 					if (object instanceof TreeParent) {
 						if (((TreeParent) object).getType().equals(TreeParent.TypeOfFolder.Client)) {
 							secureStorage.deleteNodeForClient(object.getProject(), object.getClient());
-							PasswordView.refreshViewer(viewer);
+							PasswordView.refreshViewer();
 						}
 					}
 
@@ -154,7 +144,7 @@ public class Actions {
 					final TreeObject object = (TreeObject) selection.getFirstElement();
 					if (object instanceof TreeObject) {
 						secureStorage.deleteNodeForUser(object.getProject(), object.getClient(), object.getUser());
-						PasswordView.refreshViewer(viewer);
+						PasswordView.refreshViewer();
 					}
 				}
 			}

@@ -309,8 +309,8 @@
          point="org.eclipse.ui.preferencePages">
                <page
                		 category="com.sap.adt.tools.core.ui.preferencePages.ABAP"
-                     class="com.abapblog.adt.extension.preferences.Preferences"
-                     id="com.abapblog.adt.extension.preferences.Preferences"
+                     class="com.abapblog.adt.extension.preferences.PreferencesDialog"
+                     id="com.abapblog.adt.extension.preferences.PreferencesDialog"
                      name="Automatic Logon">
                </page>
 </extension>
