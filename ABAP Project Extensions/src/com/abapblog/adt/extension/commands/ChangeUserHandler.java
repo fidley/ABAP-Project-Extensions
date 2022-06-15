@@ -1,7 +1,6 @@
 package com.abapblog.adt.extension.commands;
+
 import org.eclipse.core.commands.AbstractHandler;
-
-
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IProject;
@@ -12,15 +11,18 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 import com.abapblog.adt.extension.dialogs.UserDialog;
+import com.abapblog.adt.extension.passwords.logonService.ILogonService;
+import com.abapblog.adt.extension.passwords.logonService.LogonServiceFactory;
 import com.sap.adt.destinations.model.IDestinationData;
 import com.sap.adt.destinations.model.IDestinationDataWritable;
 import com.sap.adt.project.IAdtCoreProject;
-import com.sap.adt.tools.core.project.IAbapProject;
+import com.sap.adt.tools.core.ui.userinfo.AdtUserServiceUIFactory;
+import com.sap.adt.tools.core.ui.userinfo.IAdtUserServiceUI;
+
 public class ChangeUserHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent arg0) throws ExecutionException {
-
 
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (window != null) {
@@ -28,28 +30,48 @@ public class ChangeUserHandler extends AbstractHandler {
 			Object firstElement = selection.getFirstElement();
 			if (firstElement instanceof IAdaptable) {
 
-				IProject project = (IProject) ((IAdaptable) firstElement).getAdapter(IProject.class);
+				IProject project = ((IAdaptable) firstElement).getAdapter(IProject.class);
 				IAdtCoreProject AdtProject = project.getAdapter(IAdtCoreProject.class);
-
 				IDestinationData DestinationData = AdtProject.getDestinationData();
 				IDestinationDataWritable DestinationDataWritable = DestinationData.getWritable();
-				UserDialog UserDialog = new UserDialog(null);
-				UserDialog.create();
-				if (UserDialog.open() == Window.OK) {
-					DestinationDataWritable.setUser(UserDialog.getUser());
+
+				String userName = getNewUserName(project, DestinationDataWritable.getUser());
+				if (userName != null) {
+					DestinationDataWritable.setUser(userName);
 					IDestinationData newDestinationData = DestinationDataWritable.getReadOnlyClone();
 					AdtProject.setDestinationData(newDestinationData);
 
 					try {
 						project.close(null);
 						project.open(null);
-					       } catch (Exception e) {
+					} catch (Exception e) {
 						e.printStackTrace();
-										}
+					}
 				}
 			}
 		}
 		return null;
 
+	}
+
+	private String getNewUserName(IProject project, String currentUser) {
+
+		ILogonService logonService = LogonServiceFactory.create();
+		if (logonService.isAlreadyLoggedOn(project)) {
+			IAdtUserServiceUI AdtUserService = AdtUserServiceUIFactory.createAdtUserServiceUI();
+			String[] Users = AdtUserService.openUserNameSelectionDialog(null, false, project, currentUser);
+			if (Users.length == 1) {
+				return Users[0].toString().toUpperCase();
+			}
+		} else {
+			UserDialog UserDialog = new UserDialog(null);
+			UserDialog.create();
+			UserDialog.setUser(currentUser);
+			if (UserDialog.open() == Window.OK) {
+				return UserDialog.getUser();
+			}
+		}
+
+		return null;
 	}
 }

@@ -33,6 +33,7 @@ public class ChangeLogonLanguageHandler extends AbstractHandler {
 				IDestinationDataWritable DestinationDataWritable = DestinationData.getWritable();
 				LanguageDialog LanguageDialog = new LanguageDialog(null);
 				LanguageDialog.create();
+				LanguageDialog.setLanguage(DestinationDataWritable.getLanguage());
 				if (LanguageDialog.open() == Window.OK) {
 					DestinationDataWritable.setLanguage(LanguageDialog.getLanguage());
 					IDestinationData newDestinationData = DestinationDataWritable.getReadOnlyClone();
