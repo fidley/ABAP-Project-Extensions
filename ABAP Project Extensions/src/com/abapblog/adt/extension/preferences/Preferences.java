@@ -28,4 +28,16 @@ public class Preferences {
 		return store.getBoolean(PreferenceConstants.AutomaticLogonForAllPossibleProjects);
 	}
 
+	public static String getReadReleaseNotesVersion() {
+		return store.getString(PreferenceConstants.readReleaseNotesVersion);
+	}
+
+	public static void saveReadReleaseNotesVersion() {
+		store.setValue(PreferenceConstants.readReleaseNotesVersion, Activator.getDefault().getVersion());
+	}
+
+	public static Boolean showTransactionInputOnToolbar() {
+		return store.getBoolean(PreferenceConstants.ShowTransactionInputOnToolbar);
+	}
+
 }

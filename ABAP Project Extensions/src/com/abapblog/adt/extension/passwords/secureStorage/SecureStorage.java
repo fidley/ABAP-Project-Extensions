@@ -82,15 +82,23 @@ public class SecureStorage {
 	public String getProjectClient(IProject project) {
 		IAdtCoreProject AdtProject = project.getAdapter(IAdtCoreProject.class);
 		IDestinationData DestinationData = AdtProject.getDestinationData();
-		IDestinationDataWritable DestinationDataWritable = DestinationData.getWritable();
-		return DestinationDataWritable.getClient();
+		try {
+			IDestinationDataWritable DestinationDataWritable = DestinationData.getWritable();
+			return DestinationDataWritable.getClient();
+		} catch (Exception e) {
+			return DestinationData.getClient();
+		}
 	}
 
 	public String getProjectUser(IProject project) {
 		IAdtCoreProject AdtProject = project.getAdapter(IAdtCoreProject.class);
 		IDestinationData DestinationData = AdtProject.getDestinationData();
-		IDestinationDataWritable DestinationDataWritable = DestinationData.getWritable();
-		return DestinationDataWritable.getUser();
+		try {
+			IDestinationDataWritable DestinationDataWritable = DestinationData.getWritable();
+			return DestinationDataWritable.getUser();
+		} catch (Exception e) {
+			return DestinationData.getUser();
+		}
 	}
 
 	public String getPassword(IProject project) {

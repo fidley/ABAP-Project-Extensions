@@ -354,62 +354,65 @@
          </command>
          </menu>
         </menuContribution>
+   <menuContribution
+         allPopups="false"
+         locationURI="toolbar:org.eclipse.ui.trim.status">
+      <toolbar
+            id="com.abapblog.adt.extension.toolbar.runSAPTcode">
+         <command
+               commandId="com.abapblog.adt.extension.commands.RunSAPTcodeID"
+               disabledIcon="platform:/plugin/com.sap.adt.tools.classrun.ui/icons/etool/runclass.png"
+               icon="platform:/plugin/com.sap.adt.tools.classrun.ui/icons/etool/runclass.png"
+               style="push">
+         </command>
+         <control
+               class="com.abapblog.adt.extension.toolbar.gui.TransactionInputControl">
+         </control>
+      </toolbar>
+   </menuContribution>
          </extension>
       <extension
             point="org.eclipse.ui.commands">
+         <command
+               defaultHandler="com.abapblog.adt.extension.commands.ChangeLogonLanguageHandler"
+               id="com.abapblog.adt.extension.commands.ChangeLogonLanguage"
+               name="Change Logon Language">
+         </command>
+         <command
+               defaultHandler="com.abapblog.adt.extension.commands.ChangeUserHandler"
+               id="com.abapblog.adt.extension.commands.ChangeUser"
+               name="Change Logon User">
+         </command>
+         <command
+               defaultHandler="com.abapblog.adt.extension.commands.ChangeClientHandler"
+               id="com.abapblog.adt.extension.commands.ChangeClient"
+               name="Change Logon Client">
+         </command>
             <command id="com.abapblog.adt.extension.commands.LogToAllSAPSystems"
                      name="Logon to All SAP Systems"
                      defaultHandler="com.abapblog.adt.extension.commands.LogToAllSAPSystemsHandler"
                      >
                      </command>
-      </extension>
-            <extension
-            point="org.eclipse.ui.commands">
-            <command id="com.abapblog.adt.extension.commands.ChangeLogonLanguage"
-                     name="Change Logon Language"
-                     defaultHandler="com.abapblog.adt.extension.commands.ChangeLogonLanguageHandler"
-                     >
-                     </command>
-      </extension>
-            <extension
-            point="org.eclipse.ui.commands">
-            <command id="com.abapblog.adt.extension.commands.ChangeUser"
-                     name="Change Logon User"
-                     defaultHandler="com.abapblog.adt.extension.commands.ChangeUserHandler"
-                     >
-                     </command>
-      </extension>
-            <extension
-            point="org.eclipse.ui.commands">
-            <command id="com.abapblog.adt.extension.commands.ChangeClient"
-                     name="Change Logon Client"
-                     defaultHandler="com.abapblog.adt.extension.commands.ChangeClientHandler"
-                     >
-                     </command>
-      </extension>
-                  <extension
-            point="org.eclipse.ui.commands">
-            <command id="com.abapblog.adt.extension.commands.LogWithSecureStorage"
-                     name="Logon with Secure Storage"
-                     defaultHandler="com.abapblog.adt.extension.commands.LogWithSecureStorage"
-                     >
-                     </command>
-      </extension>
-                  <extension
-            point="org.eclipse.ui.commands">
-            <command id="com.abapblog.adt.extension.commands.ChangeDebugUserSpecificUser"
-                     name="Select user for breakpoints"
-                     defaultHandler="com.abapblog.adt.extension.commands.ChangeDebugUserSpecificUserHandler"
-                     >
-                     </command>
-      </extension>
-                  <extension
-            point="org.eclipse.ui.commands">
-            <command id="com.abapblog.adt.extension.commands.ChangeDebugUserToLogonUser"
-                     name="Set breakpoint user to logon user"
-                     defaultHandler="com.abapblog.adt.extension.commands.ChangeDebugUserToLogonUserHandler"
-                     >
-                     </command>
+            <command
+                  defaultHandler="com.abapblog.adt.extension.commands.LogWithSecureStorage"
+                  id="com.abapblog.adt.extension.commands.LogWithSecureStorage"
+                  name="Logon with Secure Storage">
+            </command>
+            <command
+                  defaultHandler="com.abapblog.adt.extension.commands.ChangeDebugUserToLogonUserHandler"
+                  id="com.abapblog.adt.extension.commands.ChangeDebugUserToLogonUser"
+                  name="Set breakpoint user to logon user">
+            </command>
+            <command
+                  categoryId="org.eclipse.debug.ui.category.run"
+                  id="com.abapblog.adt.extension.commands.RunSAPTcodeID"
+                  name="Run SAP T-Code">
+            </command>
+            <command
+                  defaultHandler="com.abapblog.adt.extension.commands.ChangeDebugUserSpecificUserHandler"
+                  id="com.abapblog.adt.extension.commands.ChangeDebugUserSpecificUser"
+                  name="Select user for breakpoints">
+            </command>
       </extension>
 <extension
          point="org.eclipse.ui.preferencePages">
@@ -480,5 +483,21 @@
          </includes>
       </viewerContentBinding>
    </extension>
+  <extension
+        point="org.eclipse.ui.bindings">
+     <key
+           commandId="com.abapblog.adt.extension.commands.RunSAPTcodeID"
+           contextId="org.eclipse.ui.contexts.window"
+           schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+           sequence="M2+F8">
+     </key>
+  </extension>
+  <extension
+        point="org.eclipse.ui.handlers">
+     <handler
+           class="com.abapblog.adt.extension.commands.RunSAPTcode"
+           commandId="com.abapblog.adt.extension.commands.RunSAPTcodeID">
+     </handler>
+  </extension>
 </plugin>
 

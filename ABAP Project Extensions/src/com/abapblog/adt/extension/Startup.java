@@ -17,6 +17,21 @@ public class Startup implements IStartup {
 
 		addProjectListener();
 		logonToAllAdtSystems();
+//		Display.getDefault().asyncExec(new Runnable() {
+//			@Override
+//			public void run() {
+//
+//				Shell myShell = new Shell(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+//						SWT.SHELL_TRIM);
+//				// Very important, generally parents must have a layout set to display children
+//				myShell.setLayout(new FillLayout());
+//				Browser browser = new Browser(myShell, SWT.NONE);
+//				browser.setUrl("../releaseNotes/releaseNotes.md");
+//				myShell.layout();
+//				myShell.open();
+//
+//			}
+//		});
 
 	}
 

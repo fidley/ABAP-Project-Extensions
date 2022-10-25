@@ -58,17 +58,17 @@ public class ChangeUserHandler extends AbstractHandler {
 
 		ILogonService logonService = LogonServiceFactory.create();
 		if (logonService.isAlreadyLoggedOn(project)) {
-			IAdtUserServiceUI AdtUserService = AdtUserServiceUIFactory.createAdtUserServiceUI();
-			String[] Users = AdtUserService.openUserNameSelectionDialog(null, false, project, currentUser);
-			if (Users.length == 1) {
-				return Users[0].toString().toUpperCase();
+			IAdtUserServiceUI adtUserService = AdtUserServiceUIFactory.createAdtUserServiceUI();
+			String[] users = adtUserService.openUserNameSelectionDialog(null, false, project, currentUser);
+			if (users != null && users.length == 1) {
+				return users[0].toUpperCase();
 			}
 		} else {
-			UserDialog UserDialog = new UserDialog(null);
-			UserDialog.create();
-			UserDialog.setUser(currentUser);
-			if (UserDialog.open() == Window.OK) {
-				return UserDialog.getUser();
+			UserDialog userDialog = new UserDialog(null);
+			userDialog.create();
+			userDialog.setUser(currentUser);
+			if (userDialog.open() == Window.OK) {
+				return userDialog.getUser();
 			}
 		}
 

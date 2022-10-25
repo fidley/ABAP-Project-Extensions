@@ -1,7 +1,6 @@
 package com.abapblog.adt.extension.preferences;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
-
 import org.eclipse.jface.preference.IPreferenceStore;
 
 import com.abapblog.adt.extension.Activator;
@@ -16,6 +15,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.doAutomaticLogonAtExpandOfProject, true);
 		store.setDefault(PreferenceConstants.askForPasswordAtProjectCreation, true);
 		store.setDefault(PreferenceConstants.AutomaticLogonForAllPossibleProjects, true);
+		store.setDefault(PreferenceConstants.ShowTransactionInputOnToolbar, true);
+
 	}
 
 }
