@@ -43,8 +43,17 @@ public class LogonService implements ILogonService {
 		if (isAdtProject(project)) {
 			if (checkCanLogonWithSecureStorage(project)) {
 				IAdtCoreProject AdtProject = project.getAdapter(IAdtCoreProject.class);
+//				HttpAuthenticationHandlerFactory handletFactory = HttpAuthenticationHandlerFactory.getInstance();
+
+//				IHttpAuthenticationHandler AuthenticatioHandler = handletFactory
+//						.findAuthenticationHandler((IHttpDestinationData) AdtProject.getDestinationData());
+//				IHttpAuthenticationToken HttpAuthenticationToken = 
+//				IHttpDestinationData httpauthent = (IHttpDestinationData) AdtProject.getDestinationData();
+//				IHttpAuthenticationToken HttpAuthenticationToken = HttpAuthenticationHandlerFactory.getInstance()
+//						.findAuthenticationHandler((IHttpDestinationData) AdtProject.getDestinationData()).getAuthenticationHeaders(null, null, null).;
 				IDestinationData DestinationData = AdtProject.getDestinationData();
 				IAuthenticationToken AuthenticationToken = new AuthenticationToken();
+//				IProjectNature nature = project.getNature(null);
 				AuthenticationToken.setPassword(secureStorage.getPassword(project));
 				adtLogonService.ensureLoggedOn(DestinationData, AuthenticationToken, new NullProgressMonitor());
 			} else {
@@ -62,16 +71,20 @@ public class LogonService implements ILogonService {
 
 				IAdtCoreProject AdtProject = project.getAdapter(IAdtCoreProject.class);
 				IDestinationData DestinationData = AdtProject.getDestinationData();
-				IDestinationDataWritable DestinationDataWritable = DestinationData.getWritable();
-				if (user != "")
-					DestinationDataWritable.setUser(user);
-				if (client != "")
-					DestinationDataWritable.setClient(client);
-				IDestinationData newDestinationData = DestinationDataWritable.getReadOnlyClone();
-				IAuthenticationToken AuthenticationToken = new AuthenticationToken();
-				String password = secureStorage.getPassword(project.getName(), client, user);
-				AuthenticationToken.setPassword(password);
-				adtLogonService.ensureLoggedOn(newDestinationData, AuthenticationToken, new NullProgressMonitor());
+				try {
+					IDestinationDataWritable DestinationDataWritable = DestinationData.getWritable();
+					if (user != "")
+						DestinationDataWritable.setUser(user);
+					if (client != "")
+						DestinationDataWritable.setClient(client);
+					IDestinationData newDestinationData = DestinationDataWritable.getReadOnlyClone();
+					IAuthenticationToken AuthenticationToken = new AuthenticationToken();
+					String password = secureStorage.getPassword(project.getName(), client, user);
+					AuthenticationToken.setPassword(password);
+					adtLogonService.ensureLoggedOn(newDestinationData, AuthenticationToken, new NullProgressMonitor());
+				} catch (Exception e) {
+					adtLogonServiceUI.ensureLoggedOn(project);
+				}
 			}
 		}
 	}

@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<toc topic="releaseNotes/releaseNotes.html" label="releaseNotes">
+	<topic href="releaseNotes/releaseNotes.html" label="ABAP Project Extensions">
+		<topic href="releaseNotes/releaseNotes.html#version-1-0-5" label="Version 1.0.5"></topic>
+		<topic href="releaseNotes/releaseNotes.html#version-1-0-4" label="Version 1.0.4"></topic>
+		<topic href="releaseNotes/releaseNotes.html#version-1-0-3" label="Version 1.0.3"></topic>
+		<topic href="releaseNotes/releaseNotes.html#earlier-versions" label="Earlier Versions"></topic>
+	</topic>
+</toc>

@@ -43,8 +43,10 @@ public class PasswordView extends ViewPart {
 
 	private void createTreeViewer(Composite parent) {
 		TreePatternFilter filter = new TreePatternFilter();
+
 		final CheckBoxFilteredTree filteredTree = new CheckBoxFilteredTree(parent,
-				SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.CHECK, filter, true, true);
+				SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.CHECK, filter, true);
+
 		final ColumnControlListener columnListener = new ColumnControlListener();
 		columnListener.setID(getID());
 		viewer = (CheckboxTreeViewer) filteredTree.getViewer();
