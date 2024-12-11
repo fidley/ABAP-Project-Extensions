@@ -71,8 +71,4 @@ END OF TERMS AND CONDITIONS
          id="com.abapblog.adt.extension"
          version="0.0.0"/>
 
-   <plugin
-         id="com.abapblog.branding"
-         version="0.0.0"/>
-
 </feature>
