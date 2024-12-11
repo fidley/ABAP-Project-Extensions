@@ -132,12 +132,24 @@ public class TransactionInputControl extends WorkbenchWindowControlContribution 
 			}
 
 			private void runTransaction(Text text, IProject project) {
+
 				AdtSapGuiEditorUtilityFactory.createSapGuiEditorUtility().openEditorAndStartTransaction(project,
-						text.getText().toUpperCase(), false);
+						text.getText().toUpperCase(), alwaysOpenWithSapGui());
 				text.setText("Enter T-Code");
 				;
 			}
 		});
+	}
+
+	public static boolean alwaysOpenWithSapGui() {
+		try {
+			@SuppressWarnings("restriction")
+			boolean alwaysOpenWithSapGui = com.sap.adt.sapgui.ui.internal.Activator.getDefault().getPreferenceStore()
+					.getBoolean(com.sap.adt.sapgui.ui.internal.PreferenceInitializer.PREF_KEY_USE_ECLIPSE_NAVIGATION);
+			return alwaysOpenWithSapGui;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }

@@ -3,8 +3,7 @@
       id="com.abapblog.adt.extension.feature"
       label="ADT Extensions - Commands"
       version="1.0.7.qualifier"
-      provider-name="ABAPBlog.com"
-      plugin="com.abapblog.branding">
+      provider-name="ABAPBlog.com">
 
    <description url="http://abapblog.com">
       Additional features for ADT plugin, like changing user, client and language of the project.
@@ -70,16 +69,6 @@ END OF TERMS AND CONDITIONS
 
    <plugin
          id="com.abapblog.adt.extension"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.abapblog.branding"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
 </feature>
