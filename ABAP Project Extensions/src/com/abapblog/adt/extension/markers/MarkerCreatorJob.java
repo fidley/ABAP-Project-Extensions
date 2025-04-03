@@ -35,8 +35,7 @@ public class MarkerCreatorJob extends Job {
 	private IDocument document;
 	private static IAbapSourceScannerServices scannerServices = AbapSourceUi.getInstance().getSourceScannerServices();
 	private TaskTag[] taskTags = null;
-	private static final IPreferenceStore store = com.abapblog.adt.extension.Activator.getDefault()
-			.getPreferenceStore();
+	private static IPreferenceStore store = com.abapblog.adt.extension.Activator.getDefault().getPreferenceStore();
 
 	public static void createMarkers(IFile file, IDocument document) {
 		try {
