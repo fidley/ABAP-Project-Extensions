@@ -40,4 +40,8 @@ public class Preferences {
 		return store.getBoolean(PreferenceConstants.ShowTransactionInputOnToolbar);
 	}
 
+	public static Boolean enableAbapTaskMining() {
+		return store.getBoolean(PreferenceConstants.enableAbapTaskMining);
+	}
+
 }

@@ -448,6 +448,12 @@
                      id="com.abapblog.adt.extension.preferences.PreferencesDialog"
                      name="Automatic Logon">
                </page>
+               <page
+                     category="org.eclipse.wst.sse.ui.preferences.editor"
+                     class="com.abapblog.adt.extension.preferences.AbapTasks"
+                     id="com.abapblog.adt.extension.preferences.abaptasks"
+                     name="ABAP Task Tags">
+               </page>
 </extension>
             <extension
                   point="org.eclipse.core.runtime.preferences">
@@ -525,21 +531,21 @@
            commandId="com.abapblog.adt.extension.commands.RunSAPTcodeID">
      </handler>
   </extension>
-  <extension
-        point="org.eclipse.ui.genericeditor.presentationReconcilers">
-     <presentationReconciler
-           class="presentationreconciler.PresentationReconciler1"
-           contentType="ABAP Project Extensions.presentationReconciler1">
-     </presentationReconciler>
-  </extension>
-  <extension
-        point="org.eclipse.core.contenttype.contentTypes">
-<content-type
-            file-extensions="gradle"
-            id="com.vogella.ide.editor.gradle.content-type"
-            name="Gradle vogella"
-            priority="normal">
-      </content-type>        
-  </extension>
+   <extension
+         point="com.sap.adt.tools.abapsource.ui.processAfterSourcePageLoaded">
+      <class
+            name="com.abapblog.adt.extension.markers.AbapPageLoadListener">
+      </class>
+   </extension>
+   <extension
+   point="org.eclipse.core.resources.markers"
+
+         id="com.abapblog.adt.extension.markers.task"
+         name="ADT Task">
+<persistent value="false"/>
+      <super type="org.eclipse.core.resources.taskmarker"/>
+      <attribute name="owner"/>
+</extension>
+
 </plugin>
 
