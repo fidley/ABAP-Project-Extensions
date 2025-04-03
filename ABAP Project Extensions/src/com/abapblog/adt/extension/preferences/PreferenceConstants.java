@@ -10,4 +10,5 @@ public class PreferenceConstants {
 	public static final String AutomaticLogonForAllPossibleProjects = "AutomaticLogonForAllPossibleProjects";
 	public static final String readReleaseNotesVersion = "readReleaseNotesVersion";
 	public static final String ShowTransactionInputOnToolbar = "ShowTransactionInputOnToolbar";
+	public static final String enableAbapTaskMining = "enableAbapTaskMining";
 }
