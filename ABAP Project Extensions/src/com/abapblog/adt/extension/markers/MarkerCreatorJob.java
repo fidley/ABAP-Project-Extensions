@@ -13,6 +13,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobGroup;
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.eclipse.core.runtime.preferences.IScopeContext;
@@ -37,12 +38,14 @@ public class MarkerCreatorJob extends Job {
 	private static IPreferenceStore store = com.abapblog.adt.extension.Activator.getDefault().getPreferenceStore();
 
 	public static void createMarkers(IFile file, IDocument document) {
-		MarkerDeletionJob.deleteMarkers(file);
+		final JobGroup jobGroup = new JobGroup("Marker Groups", 1, 1);
+		MarkerDeletionJob.deleteMarkers(file, jobGroup);
 		if (!store.getBoolean(PreferenceConstants.enableAbapTaskMining)) {
 			return;
 		}
-		MarkerCreatorJob lintingJob = new MarkerCreatorJob(file, document);
-		lintingJob.schedule();
+		MarkerCreatorJob job = new MarkerCreatorJob(file, document);
+		job.setJobGroup(jobGroup);
+		job.schedule();
 	}
 
 	private MarkerCreatorJob(IFile file, IDocument document) {

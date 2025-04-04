@@ -5,6 +5,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobGroup;
 
 public class MarkerDeletionJob extends Job {
 
@@ -12,10 +13,12 @@ public class MarkerDeletionJob extends Job {
 	public static final String PROBLEM_MARKER_ID = "com.abapblog.adt.extension.markers.problem";
 	private IFile file;
 
-	public static void deleteMarkers(IFile file) {
+	public static void deleteMarkers(IFile file, JobGroup jobGroup) {
 
-		MarkerDeletionJob lintingJob = new MarkerDeletionJob(file);
-		lintingJob.schedule();
+		MarkerDeletionJob job = new MarkerDeletionJob(file);
+		job.setJobGroup(jobGroup);
+		job.schedule();
+
 	}
 
 	private MarkerDeletionJob(IFile file) {
