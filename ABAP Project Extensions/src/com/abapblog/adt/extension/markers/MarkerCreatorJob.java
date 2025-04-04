@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
@@ -38,11 +37,7 @@ public class MarkerCreatorJob extends Job {
 	private static IPreferenceStore store = com.abapblog.adt.extension.Activator.getDefault().getPreferenceStore();
 
 	public static void createMarkers(IFile file, IDocument document) {
-		try {
-			file.deleteMarkers(TASK_MARKER_ID, false, IFile.DEPTH_ZERO);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
+		MarkerDeletionJob.deleteMarkers(file);
 		if (!store.getBoolean(PreferenceConstants.enableAbapTaskMining)) {
 			return;
 		}
@@ -78,7 +73,7 @@ public class MarkerCreatorJob extends Job {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new Status(Status.OK, "com.abapblog.adtlinter", "Linting completed");
+		return new Status(Status.OK, "com.abapblog.adt.extension.markers", "Marker creation completed");
 	}
 
 	private List<Integer> findTag(String input, String tag) {
@@ -88,17 +83,6 @@ public class MarkerCreatorJob extends Job {
 		Matcher matcher = pattern.matcher(input);
 		while (matcher.find()) {
 			offsets.add(matcher.start());
-		}
-		return offsets;
-	}
-
-	private List<Integer> findTag2(String input, String tag) {
-		List<Integer> offsets = new ArrayList<>();
-		String code = input.toUpperCase();
-		int index = code.indexOf(tag.toUpperCase());
-		while (index >= 0) {
-			offsets.add(index);
-			index = code.indexOf(tag.toUpperCase(), index + 1);
 		}
 		return offsets;
 	}
