@@ -36,9 +36,10 @@ public class MarkerCreatorJob extends Job {
 	private static IAbapSourceScannerServices scannerServices = AbapSourceUi.getInstance().getSourceScannerServices();
 	private TaskTag[] taskTags = null;
 	private static IPreferenceStore store = com.abapblog.adt.extension.Activator.getDefault().getPreferenceStore();
+	private final static JobGroup jobGroup = new JobGroup("Marker Groups", 1, 5);
 
 	public static void createMarkers(IFile file, IDocument document) {
-		final JobGroup jobGroup = new JobGroup("Marker Groups", 1, 1);
+
 		MarkerDeletionJob.deleteMarkers(file, jobGroup);
 		if (!store.getBoolean(PreferenceConstants.enableAbapTaskMining)) {
 			return;
@@ -66,14 +67,18 @@ public class MarkerCreatorJob extends Job {
 					if (!scannerServices.isComment(document, offset)) {
 						continue;
 					}
-					String text = document.get().substring(offset,
-							getLineEndOffset(document, document.getLineOfOffset(offset)));
-					new TaskMarker().create(file, text, document.getLineOfOffset(offset) + 1, taskTag.getPriority());
+					try {
+						String text = document.get().substring(offset,
+								getLineEndOffset(document, document.getLineOfOffset(offset)));
+						new TaskMarker().create(file, text, document.getLineOfOffset(offset) + 1,
+								taskTag.getPriority());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 
-		} catch (BadLocationException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return new Status(Status.OK, "com.abapblog.adt.extension.markers", "Marker creation completed");

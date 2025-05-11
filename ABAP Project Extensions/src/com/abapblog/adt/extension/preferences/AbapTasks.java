@@ -11,6 +11,7 @@ import com.abapblog.adt.extension.Activator;
 public class AbapTasks extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 	private final IPreferenceStore store;
 	private Boolean enableAbapTaskMining = false;
+	public static final String ID = "com.abapblog.adt.extension.preferences.abaptasks"; //$NON-NLS-1$
 
 	public AbapTasks() {
 		super(GRID);

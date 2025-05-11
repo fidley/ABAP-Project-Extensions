@@ -16,6 +16,7 @@ public class PreferencesDialog extends FieldEditorPreferencePage implements IWor
 	private Boolean askForPasswordAtProjectCreation = false;
 	private Boolean AutomaticLogonForAllPossibleProjects = false;
 	private Boolean ShowTransactionInputOnToolbar = false;
+	public static final String ID = "com.abapblog.adt.extension.preferences.PreferencesDialog"; //$NON-NLS-1$
 
 	public PreferencesDialog() {
 		super(GRID);
