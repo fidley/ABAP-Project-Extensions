@@ -557,6 +557,13 @@
       <super type="org.eclipse.core.resources.taskmarker"/>
       <attribute name="owner"/>
 </extension>
+   <extension
+         point="org.eclipse.ui.genericeditor.foldingReconcilers">
+      <foldingReconciler
+            class="reconciler.Reconciler1"
+            contentType="ABAP Project Extensions.foldingReconciler1">
+      </foldingReconciler>
+   </extension>
 
 </plugin>
 

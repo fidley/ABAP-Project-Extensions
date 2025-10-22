@@ -47,7 +47,7 @@ public class LogonService implements ILogonService {
 
 //				IHttpAuthenticationHandler AuthenticatioHandler = handletFactory
 //						.findAuthenticationHandler((IHttpDestinationData) AdtProject.getDestinationData());
-//				IHttpAuthenticationToken HttpAuthenticationToken = 
+//				IHttpAuthenticationToken HttpAuthenticationToken =
 //				IHttpDestinationData httpauthent = (IHttpDestinationData) AdtProject.getDestinationData();
 //				IHttpAuthenticationToken HttpAuthenticationToken = HttpAuthenticationHandlerFactory.getInstance()
 //						.findAuthenticationHandler((IHttpDestinationData) AdtProject.getDestinationData()).getAuthenticationHeaders(null, null, null).;
@@ -56,6 +56,16 @@ public class LogonService implements ILogonService {
 //				IProjectNature nature = project.getNature(null);
 				AuthenticationToken.setPassword(secureStorage.getPassword(project));
 				adtLogonService.ensureLoggedOn(DestinationData, AuthenticationToken, new NullProgressMonitor());
+//				IDestinationDataWritable DestinationDataWritable = DestinationData.getWritable();
+//				DestinationDataWritable.setUser("MALCOLMX");
+//				DestinationDataWritable.setClient("000");
+//				ISystemConfigurationWritable systemConfigurationWritable = DestinationDataWritable
+//						.getSystemConfiguration().getWritable();
+//				systemConfigurationWritable.setServer("https://test.sap.com:443");
+//				systemConfigurationWritable.setSystemId("ABAP");
+//				systemConfigurationWritable.setMessageServer("mySAP");
+//				DestinationDataWritable.setSystemConfiguration(systemConfigurationWritable);
+//				AdtProject.setDestinationData(DestinationDataWritable.getReadOnlyClone());
 			} else {
 				adtLogonServiceUI.ensureLoggedOn(project);
 			}
