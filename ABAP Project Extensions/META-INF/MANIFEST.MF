@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ABAP Project Extensions
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-SymbolicName: com.abapblog.adt.extension;singleton:=true
 Bundle-Version: 1.0.8.qualifier
 Bundle-Activator: com.abapblog.adt.extension.Activator
@@ -22,7 +22,8 @@ Require-Bundle: org.eclipse.ui,
  com.sap.adt.tools.core.ui,
  org.eclipse.ui.genericeditor,
  com.sap.adt.tools.abapsource.ui,
- org.eclipse.wst.sse.core
+ org.eclipse.wst.sse.core,
+ com.sap.adt.tools.abapsource
 Automatic-Module-Name: com.abapblog.adt.extension
 Bundle-ActivationPolicy: lazy
 Import-Package: com.sap.adt.tools.core.ui.userinfo
